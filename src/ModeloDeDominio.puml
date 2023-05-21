@@ -1,0 +1,28 @@
+@startuml
+skin rose
+
+Entity Instrumento {
+tipoDeMaterial
+CodigoDelInstrumento
+PrecioDelInstrumento
+}
+
+Entity Viento {
+
+}
+
+Entity Percusion {
+tipoDePercusion
+altura
+}
+
+Entity Cuerda {
+tipoDeCuerda
+numeroDeCuerda
+
+}
+
+Viento "1..*" --Instrumento
+Percusion "1..*" --Instrumento
+Cuerda "1..*" -- Instrumento
+@enduml

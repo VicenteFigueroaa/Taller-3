@@ -1,0 +1,113 @@
+@startuml
+skin rose
+left to right direction
+set separator none
+package cl.ucn.disc.pa.curricular {
+
+package services {
+
+interface Sistema {
++agregarInstrumento (ListaInstrumento: Instrumento []) : void
++venderInstrumento (codigoDelInstrumento: int, ListaInstrumento: Instrumento [] ) : Boolean
++consultarInventario (ListaInstrumento: Instrumento [], codigoDelInstrumento: int, StockDeInstrumento: int) :Boolean
++cerrar (): void
+}
+
+class SistemaImpl {
+-Trabajador : ListaTrabajador
+-Instrumento : ListaInstrumento
++SistemaImpl ()
++menuSistema () : void
+}
+SistemaImpl ..|> Sistema: Implementa
+
+}
+
+package model {
+
+
+
+class ListaInstrumento {
+-cantidadInstrumento: int
+-cantidadMaxima: int
+-ListaInstrumento : Instrumento []
++ListaInstrumento (cantidadMaxima: int)
++agregar (instrumento: Instrumento) : void
++vender (instrumento: Instrumento, codigoDelInstrumento: int, StockDeInstrumento: int):
++getCantidadInstrumento () : int
++getCantidadMaxima () : int
+
+
+
+}
+abstract class Instrumento {
+-tipoDeInstrumento: String
+-tipoDeMaterial: String
+-codigoDelInstrumento: int
+-PrecioDelInstrumento: int
++Instrumento (tipoDeInstrumento: String, tipoDeMaterial: String, codigoDelInstrumento: int, PrecioDelInstrumento: int)
++getTipoDeInstrumento () : String
++getTipoDeMaterial () : String
++getCodigoDelInstrumento () : int
++getPrecioDelInstrumento () : int
++setTipoDeInstrumento () : String
++setTipoDeMaterial () : String
++setCodigoDelInstrumento () : int
++setPrecioDelInstrumento () : int
+
+
+}
+
+class Cuerda {
+-tipoDeCuerda: String
+-numeroDeCuerda: int
+-tipo: String
++Cuerda (tipoDeInstrumento : String, tipoDeMaterial: String, codigoDelInstrumento: int, PrecioDelInstrumento: int , tipoDeCuerda: String, numeroDeCuerda: int,tipo: String)
++getTipoDeCuerda () : String
++getNumeroDeCuerda () : int
++getTipo () : String
++setTipoDeCuerda () : String
++setNumeroDeCuerda () : int
++setTipo (): String
+}
+Instrumento <|-- Cuerda
+class Percusion {
+-tipoDePercusion: String
+-altura: String
++Percusion (tipoDeInstrumento : String, tipoDeMaterial: String, codigoDelInstrumento: int, PrecioDelInstrumento: int , tipoDePercusion: String, altura: String)
++getTipoDePercusion () : String
++getAltura () : String
++setTipoDePercusion () : String
++setAltura () : String
+
+}
+Instrumento <|-- Percusion
+class Viento {
++Viento (tipoDeInstrumento : String, tipoDeMaterial: String, codigoDelInstrumento: int, PrecioDelInstrumento: int)
+}
+Instrumento <|-- Viento
+class ListaTrabajador{
+-cantidadTrabajador: int
+-cantidadMaxima: int
+-ListaTrabajador: Trabajador []
++ListaTrabajador (cantidadMaxima: int)
++getCantidadMaxima () : int
++getCantidadTrabajador () : int
+}
+class Trabajador {
+-precio : int
+-stockDeInstrumento : int
++Trabajador (precio : int, stockDeInstrumento: int)
++getPrecio (): int
++getStockDeInstrumento (): int
++setPrecio () : int
++setStockDeInstrumento () : int
+}
+}
+SistemaImpl *-> "1"ListaInstrumento
+SistemaImpl *-> "1"ListaTrabajador
+ListaInstrumento "1" o--> "*"Instrumento : tiene
+ListaTrabajador "1" o--> "*"Trabajador : tiene
+
+
+@enduml
